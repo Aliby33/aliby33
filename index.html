@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  <link rel='stylesheet' href='https://cdn.tailwindcss.com'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradingView Chart with Stylish UI</title>
+  <style>
+    /* تنسيق الجسم بشكل عام */
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #1e1e1e; /* خلفية داكنة مشابهة لتصميم TradingView */
+      color: #fff; /* نص أبيض لسهولة القراءة */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* عنوان الصفحة */
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    /* حاوية الرسم البياني */
+    #tv_chart_container {
+      width: 90%;
+      height: 75vh; /* عرض الرسم البياني ليشغل مساحة أكبر */
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+      background-color: #232323; /* لون خلفية الرسم البياني مشابه لـ TradingView */
+    }
+
+    /* شريط أدوات الموقع */
+    .toolbar {
+      width: 90%;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .toolbar button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0e76a8; /* زر بألوان متناسقة مع TradingView */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toolbar button:hover {
+      background-color: #05668d; /* تغيير اللون عند التمرير */
+    }
+  </style>
+</head>
+<body>
+  <h1>TradingView Chart with Stylish UI</h1>
+
+  <div class="toolbar">
+    <button onclick="changeSymbol('NASDAQ:AAPL')">AAPL</button>
+    <button onclick="changeSymbol('BTCUSD')">BTC/USD</button>
+    <button onclick="changeSymbol('EURUSD')">EUR/USD</button>
+  </div>
+
+  <div id="tv_chart_container"></div>
+
+  <!-- إضافة مكتبة TradingView Widget -->
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script>
+    // استخدم معلمة 'symbol' من الرابط لعرض الرسم البياني المناسب
+    const urlParams = new URLSearchParams(window.location.search);
+    const symbolFromUrl = urlParams.get('symbol') || 'NASDAQ:AAPL'; // إذا لم يوجد رمز في الرابط، سيعرض AAPL كافتراضي
+
+    var widget = new TradingView.widget({
+      "container_id": "tv_chart_container", // حاوية الرسم البياني
+      "autosize": true, // جعل الرسم البياني يتناسب مع حجم الحاوية
+      "symbol": symbolFromUrl, // الرمز المالي الذي يتم تمريره من الرابط
+      "interval": "D", // الإطار الزمني
+      "timezone": "America/New_York", // المنطقة الزمنية
+      "theme": "dark", // السمة (Dark theme مشابهة لتصميم TradingView)
+      "style": "1", // نوع الرسم البياني
+      "toolbar_bg": "#2e2e2e", // خلفية شريط الأدوات
+      "hide_side_toolbar": false, // إظهار الشريط الجانبي
+      "allow_symbol_change": true, // السماح بتغيير الرمز
+      "save_image": false, // تعطيل حفظ الصورة
+      "studies": [
+        "MACD", // مؤشر MACD
+        "RSI"   // مؤشر RSI
+      ]
+    });
+
+    // تغيير الرمز من خلال الأزرار
+    function changeSymbol(symbol) {
+      widget.activeChart().setSymbol(symbol);
+    }
+  </script>
+</body>
+</html>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/@tanstack/react-query@4.28.1/dist/react-query.production.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
